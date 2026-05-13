@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GYFMUN — Admin Panel</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Firebase Compat SDK v10 -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     LOGIN SCREEN
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">GYFMUN</div>
+    <p class="login-subtitle">Admin Panel</p>
+
+    <form id="login-form" novalidate autocomplete="off">
+      <div class="login-field">
+        <label for="admin-email">Email</label>
+        <input type="email" id="admin-email" placeholder="admin@example.com" autocomplete="username">
+      </div>
+      <div class="login-field">
+        <label for="admin-password">Пароль</label>
+        <input type="password" id="admin-password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-login" id="login-btn">Войти</button>
+      <p id="login-error" class="login-error hidden"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DASHBOARD
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="dashboard" class="hidden">
+
+  <!-- Header -->
+  <header class="admin-header">
+    <div class="admin-header-brand">
+      GYFMUN
+      <span>Admin Panel</span>
+    </div>
+    <button class="btn-logout" id="logout-btn">Выйти</button>
+  </header>
+
+  <!-- Main content -->
+  <main class="admin-main">
+
+    <!-- Stats row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Всего заявок</div>
+        <div class="stat-value" id="stat-total">—</div>
+        <div class="stat-sub">зарегистрировано</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Средний MUN опыт</div>
+        <div class="stat-value" id="stat-avg">—</div>
+        <div class="stat-sub">конференций в среднем</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Лучший делегат</div>
+        <div class="stat-value stat-name" id="stat-top">—</div>
+        <div class="stat-sub" id="stat-top-sub">наибольший опыт</div>
+      </div>
+    </div>
+
+    <!-- Applications table -->
+    <div class="table-section-title">Список заявок</div>
+
+    <div class="table-wrapper">
+      <table class="apps-table" id="apps-table">
+        <thead>
+          <tr>
+            <th style="width:52px;">#</th>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Telegram</th>
+            <th style="text-align:center;">MUN опыт</th>
+            <th>Рейтинг</th>
+            <th>Дата</th>
+            <th style="width:110px;"></th>
+          </tr>
+        </thead>
+        <tbody id="apps-tbody">
+          <tr>
+            <td colspan="8" class="table-loading">Загрузка данных...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DETAIL MODAL
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="detail-modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-overlay" id="modal-overlay"></div>
+  <div class="modal-card" id="modal-content">
+    <!-- Populated by admin.js -->
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="js/firebase-config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
